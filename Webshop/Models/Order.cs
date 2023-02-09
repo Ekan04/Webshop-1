@@ -35,6 +35,7 @@ namespace Webshop.Models
                 o.Customer = Kund.getOneCustomer(reader.GetInt32("CustomerNr"));
                 ProductIds = reader.GetString("ProductNumbers").Split(',');
 
+                o.OrderedProducts = new List<Products>();
                 foreach (string pr in ProductIds)
                 {
                     o.OrderedProducts.Add(Products.getOneProduct(int.Parse(pr)));
@@ -48,6 +49,6 @@ namespace Webshop.Models
 
             return list;
         }
-        //HEj
+        
     }
 }
