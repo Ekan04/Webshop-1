@@ -1,0 +1,42 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h2>Products index</h2>
+<h3>@ViewBag.Meddelande</h3>
+
+<table>
+
+    <thead>
+        <tr id="tableHeader">
+            <td>ProductNr</td>
+            <td>Name</td>
+            <td>Manufacturer</td>
+            <td>Stock</td>
+            <td>Price</td>
+            <td></td>
+            <td>
+                <a asp-area="" asp-controller="Product" asp-action="NewProduct">Ny Produkt</a>
+            </td>
+        </tr>
+    </thead>
+
+    @model List<Products>
+    @{
+        foreach (Products p in Model)
+        {
+            <tr class="info">
+                <td>@p.ProductNr</td>
+                <td>@p.Name</td>
+                <td>@p.Manufacturer</td>
+                <td>@p.Stock</td>
+                <td>@p.Price</td>
+                <td>@Html.ActionLink("Edit","Edit","Product", new { productNr = @p.ProductNr }) </td>
+                <td>@Html.ActionLink("Remove","removeProduct","Product", new { productNr = @p.ProductNr }) </td>
+            </tr>
+        }
+    }
+
+</table>

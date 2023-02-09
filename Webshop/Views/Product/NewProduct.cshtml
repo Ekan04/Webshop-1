@@ -1,0 +1,21 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<form action="/Product/saveNewProduct" method="Post" class="simpleform">
+    <label for="Name">Name</label>
+    <input type="text" id="Name" name="Name" value="" placeholder="Name" />
+
+    <label for="Manufacturer">Manufacturer</label>
+    <input type="text" id="Manufacturer" name="Manufacturer" value="" placeholder="Manufacturer" />
+
+    <label for="Stock">Stock</label>
+    <input type="number" id="Stock" name="Stock" value="" placeholder="Stock" />
+
+    <label for="Price">Price</label>
+    <input type="number" id="Price" name="Price" value="" placeholder="Price" />
+
+    <input type="submit" value="Spara" />
+</form>

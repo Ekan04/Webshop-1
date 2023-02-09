@@ -1,0 +1,43 @@
+﻿@model List<Kund>
+@{
+}
+
+<h2>Customer Index</h2>
+<h3>@ViewBag.Meddelande</h3>
+
+
+<table>
+
+   <thead>
+       <tr id="tableHeader">
+           <td>CustomerNr</td>
+           <td>Name</td>
+           <td>Username</td>
+           <td>City</td>
+           <td>Adress</td>
+           <td>PhoneNr</td>
+           <td></td>
+            <td>
+                <a asp-area="" asp-controller="Customer" asp-action="NewCustomer">Ny Kund</a>
+            </td>
+       </tr>
+   </thead>
+   
+    
+    @{
+        foreach (Kund k in Model)
+        {
+            <tr class="info">
+                <td>@k.CustomerNr</td>
+                <td>@k.Name</td>
+                <td>@k.Username</td>
+                <td>@k.City</td>
+                <td>@k.Adress</td>
+                <td>@k.PhoneNr</td>
+                <td>@Html.ActionLink("Edit","EditCustomerAuto","Customer", new { customerNr = @k.CustomerNr }) </td>
+                <td>@Html.ActionLink("Delete","deleteCustomer","Customer", new { customerNr = @k.CustomerNr }) </td>
+            </tr>
+        }
+    }
+</table>
+

@@ -1,0 +1,50 @@
+﻿@model List<Order>
+@{
+}
+
+<h2>Customer Index</h2>
+
+<a asp-area="" asp-controller="Order" asp-action="NewOrder">Ny Order</a>
+
+<table>
+
+    <thead>
+        <tr id="tableHeader">
+            <td>OrderNR</td>
+            <td>UserId</td>
+            <td>Adress</td>
+            <td>Amount of products</td>
+            <td>Status</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+    @*@model List<Order> Fungerar inte, behöver hjälp från Ralph *@
+    @*@model List<Webshop.Models.Order>*@
+    @{
+        foreach (Order o in Model)
+        {
+            <tr class="info">
+                <td>@o.OrderNr</td>
+                <td>@o.Status</td>
+                <td>@o.Customer.Name</td>
+                <td>@o.OrderedProducts.Count</td>
+                <td>
+                    <div class="hidden">
+                        <table>
+                            @foreach (Products p in o.OrderedProducts){
+                                <tr>
+                                    <td>@p.ProductNr</td>
+                                    <td>@p.Name</td>
+                                    <td>@p.Manufacturer</td>
+                                    <td>@p.Price</td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </td>
+                <td>@Html.ActionLink("edit","Edit","Order", new { id = @o.OrderNr }) </td>
+            </tr>
+        }
+    }
+</table>

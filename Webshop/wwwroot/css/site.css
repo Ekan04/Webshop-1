@@ -1,0 +1,37 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/* Styla Form */
+
+table {
+    row-gap: 5px;
+    width: 75%;
+}
+
+td {
+    border: 3px solid rgba(0,0,0,0.6);
+}
+
+#tableHeader {
+    background-color: antiquewhite;
+}
+
+.info:nth-child(2n+1) {
+    background-color: lightblue;
+}
