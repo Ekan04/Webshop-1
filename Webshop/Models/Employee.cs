@@ -7,18 +7,18 @@ namespace Webshop.Models
 {
     public class Employee
     {
-        public int Id { get; set; } = -1;
-        public string Name { get; set; } = "";
+        public int Id { get; set; }
+        public string Name { get; set; }
 
         [Required(ErrorMessage = "Writ a password")]
         [Display(Name = "Your password")]
-        public string Password { get; set; } = "";
+        public string Password { get; set; }
 
         [Required(ErrorMessage = "Write a valid Emailadress")]
         [DataType(DataType.EmailAddress, ErrorMessage = "This Email's formatting is wrong")]
         [Display(Name = "Your Emailadress")]
-        public string Email { get; set; } = "";
-        public string Role { get; set; } = "";
+        public string Email { get; set; }
+        public string Role { get; set; }
 
 
 
@@ -62,8 +62,8 @@ namespace Webshop.Models
                 }
                 else
                 {
-                    ViewData["ErrorMessage"] = "Your Email or Password is wrong.";
-                    return View("LoginPartial", Employee);
+                    Employee employee = new Employee();
+                    return employee;
                 }
             }
         }

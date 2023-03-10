@@ -1,3 +1,15 @@
-﻿@{
-    Layout = "_Layout";
+﻿@inject IHttpContextAccessor context;
+@{
+    //Layout = "_Layout";
+   
+    switch (context.HttpContext.Session.GetString("employeeRole"))
+    {
+        case "Admin":
+            Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+            break;
+        default:
+            //Guest layout
+            Layout = "~/Views/Shared/_LayoutGuest.cshtml";
+            break;
+    }
 }

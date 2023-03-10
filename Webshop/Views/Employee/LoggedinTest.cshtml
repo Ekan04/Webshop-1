@@ -1,0 +1,7 @@
+﻿@inject IHttpContextAccessor context;
+
+<h2>Welcome @context.HttpContext.Session.GetString("employeeName")</h2>
+
+<div style="width:500px; height: 500px; background-color: magenta;"></div>
+
+<h2>@context.HttpContext.Session.GetString("employeeRole")</h2>
