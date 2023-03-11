@@ -1,7 +1,7 @@
-﻿@inject IHttpContextAccessor context;
+﻿@inject IHttpContextAccessor contxt;
 
-<h2>Welcome @context.HttpContext.Session.GetString("employeeName")</h2>
+<h2>Welcome @contxt.HttpContext.Session.GetString("employeeName")</h2>
 
 <div style="width:500px; height: 500px; background-color: magenta;"></div>
 
-<h2>@context.HttpContext.Session.GetString("employeeRole")</h2>
+<h2>@contxt.HttpContext.Session.GetString("employeeRole")</h2>

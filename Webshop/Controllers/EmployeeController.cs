@@ -7,11 +7,11 @@ namespace Webshop.Controllers
 {
     public class EmployeeController : Controller
     {
-        private readonly IHttpContextAccessor context;
+        private readonly IHttpContextAccessor contxt;
         
         public EmployeeController(IHttpContextAccessor httpContextAccessor) 
         { 
-            context = httpContextAccessor;
+            contxt = httpContextAccessor;
         }
         public IActionResult Index()
         {
@@ -27,8 +27,8 @@ namespace Webshop.Controllers
                 ViewBag.felmeddelande = "Wrong email or password";
                 return View("LoginPartial");
             }
-            context.HttpContext.Session.SetString("employeeName", employee.Name);
-            context.HttpContext.Session.SetString("employeeRole", employee.Role);
+            contxt.HttpContext.Session.SetString("employeeName", employee.Name);
+            contxt.HttpContext.Session.SetString("employeeRole", employee.Role);
 
             return View("LoggedinTest");
         }
@@ -36,6 +36,12 @@ namespace Webshop.Controllers
         public IActionResult LoggedinTest()
         {
             return View();
+        }
+
+        public IActionResult logout()
+        {
+            contxt.HttpContext.Session.Clear();
+            return View("Index");
         }
     }
 }

@@ -7,60 +7,100 @@ namespace Webshop.Controllers
     {       
         public IActionResult Index()
         {
-            
-            return View(Kund.getAllCustomers());
+            if (HttpContext.Session.GetString("employeeRole") == "Admin")
+            {
+                return View(Kund.getAllCustomers());
+            }
+            else
+            {
+                return View("~/Views/Home/Index.cshtml");
+            }
         }
         
         public IActionResult EditCustomerAuto(int customerNr)
         {
-
-            return View(Kund.getOneCustomer(customerNr));
+            if (HttpContext.Session.GetString("employeeRole") == "Admin")
+            {
+                return View(Kund.getOneCustomer(customerNr));
+            }
+            else
+            {
+                return View("~/Views/Home/Index.cshtml");
+            }
         }
 
         [HttpPost]
         public IActionResult saveCustomer(Kund k)
         {
-            if (Kund.saveEditedCustomer(k) == true)
+            if (HttpContext.Session.GetString("employeeRole") == "Admin")
             {
-                ViewBag.Meddelande = "Redigeringen har sparats";
+                if (Kund.saveEditedCustomer(k) == true)
+                {
+                    ViewBag.Meddelande = "Redigeringen har sparats";
+                }
+                else
+                {
+                    ViewBag.Meddelande = "Redigeringen har inte sparats";
+                }
+                return View("Index", Kund.getAllCustomers());
             }
             else
             {
-                ViewBag.Meddelande = "Redigeringen har inte sparats";
-            }
-            return View("Index", Kund.getAllCustomers()); 
+                return View("~/Views/Home/Index.cshtml");
+            } 
         }
 
         public IActionResult NewCustomer()
         {
-            return View();
+            if (HttpContext.Session.GetString("employeeRole") == "Admin")
+            {
+                return View();
+            }
+            else
+            {
+                return View("~/Views/Home/Index.cshtml");
+            }
         }
 
         [HttpPost]
         public IActionResult saveNewCustomer(Kund ny)
         {
-            if (Kund.saveNewCustomer(ny) == true)
+            if (HttpContext.Session.GetString("employeeRole") == "Admin")
             {
-                ViewBag.Meddelande = "Den nya kunden har sparats";
+                if (Kund.saveNewCustomer(ny) == true)
+                {
+                    ViewBag.Meddelande = "Den nya kunden har sparats";
+                }
+                else
+                {
+                    ViewBag.Meddelande = "Den nya kunden har inte sparats";
+                }
+                return View("Index", Kund.getAllCustomers());
             }
             else
             {
-                ViewBag.Meddelande = "Den nya kunden har inte sparats";
+                return View("~/Views/Home/Index.cshtml");
             }
-            return View("Index", Kund.getAllCustomers());
         }
 
         public IActionResult deleteCustomer(int customerNr)
         {
-            if (Kund.removeCustomer(customerNr) == true)
+            if (HttpContext.Session.GetString("employeeRole") == "Admin")
             {
-                ViewBag.Meddelande = "Kunden med CustomerNr: " + customerNr + " har tagits bort";
+                if (Kund.removeCustomer(customerNr) == true)
+                {
+                    ViewBag.Meddelande = "Kunden med CustomerNr: " + customerNr + " har tagits bort";
+                }
+                else
+                {
+                    ViewBag.Meddelande = "Kunden har inte tagits bort";
+                }
+                return View("Index", Kund.getAllCustomers());
             }
             else
             {
-                ViewBag.Meddelande = "Kunden har inte tagits bort";
+                return View("~/Views/Home/Index.cshtml");
             }
-            return View("Index", Kund.getAllCustomers()); 
         }
     }
 }

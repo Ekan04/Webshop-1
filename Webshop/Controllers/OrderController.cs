@@ -7,12 +7,26 @@ namespace Webshop.Controllers
     {
         public IActionResult Index()
         {
-            return View(Order.getAllOrders());
+            if(HttpContext.Session.GetString("employeeRole") == "Admin")
+            {
+                return View(Order.getAllOrders());
+            }
+            else
+            {
+                return View("~/Views/Home/Index.cshtml");
+            }
         }
 
         public IActionResult Details(int id)
         {
-            return View();
+            if (HttpContext.Session.GetString("employeeRole") == "Admin")
+            {
+                return View();
+            }
+            else
+            {
+                return View("~/Views/Home/Index.cshtml");
+            }
         }
 
     }

@@ -7,58 +7,100 @@ namespace Webshop.Controllers
     {
         public IActionResult Index()
         {
-            return View(Products.getAllProducts());
+            if (HttpContext.Session.GetString("employeeRole") == "Admin")
+            {
+                return View(Products.getAllProducts());
+            }
+            else
+            {
+                return View("~/Views/Home/Index.cshtml");
+            }
         }
 
         public IActionResult Edit(int productNr)
         {
-            return View(Products.getOneProduct(productNr));
+            if (HttpContext.Session.GetString("employeeRole") == "Admin")
+            {
+                return View(Products.getOneProduct(productNr));
+            }
+            else
+            {
+                return View("~/Views/Home/Index.cshtml");
+            }
         }
 
         [HttpPost]
         public IActionResult saveProduct(Products p)
         {
-            if (Products.saveEditedProduct(p) == true)
+            if (HttpContext.Session.GetString("employeeRole") == "Admin")
             {
-                ViewBag.Meddelande = "Produkten har sparats";
+                if (Products.saveEditedProduct(p) == true)
+                {
+                    ViewBag.Meddelande = "Produkten har sparats";
+                }
+                else
+                {
+                    ViewBag.Meddelande = "Produkten har inte sparats";
+                }
+                return View("Index", Products.getAllProducts());
             }
             else
             {
-                ViewBag.Meddelande = "Produkten har inte sparats";
+                return View("~/Views/Home/Index.cshtml");
             }
-            return View("Index", Products.getAllProducts());
         }
 
         public IActionResult NewProduct()
         {
-            return View();
+            if (HttpContext.Session.GetString("employeeRole") == "Admin")
+            {
+                return View();
+            }
+            else
+            {
+                return View("~/Views/Home/Index.cshtml");
+            }
         }
 
         [HttpPost]
         public IActionResult saveNewProduct(Products ny)
         {
-            if (Products.saveNewProduct(ny) == true)
+            if (HttpContext.Session.GetString("employeeRole") == "Admin")
             {
-                ViewBag.Meddelande = "Den nya produkten har sparats";
+                if (Products.saveNewProduct(ny) == true)
+                {
+                    ViewBag.Meddelande = "Den nya produkten har sparats";
+                }
+                else
+                {
+                    ViewBag.Meddelande = "Den nya produkten har inte sparats";
+                }
+                return View("Index", Products.getAllProducts());
             }
             else
             {
-                ViewBag.Meddelande = "Den nya produkten har inte sparats";
+                return View("~/Views/Home/Index.cshtml");
             }
-            return View("Index", Products.getAllProducts());
         }
 
         public IActionResult removeProduct(int productNr)
         {
-            if (Products.removeProduct(productNr) == true)
+            if (HttpContext.Session.GetString("employeeRole") == "Admin")
             {
-                ViewBag.Meddelande = "Produkten med ProductNr: " + productNr + " har tagits bort";
+                if (Products.removeProduct(productNr) == true)
+                {
+                    ViewBag.Meddelande = "Produkten med ProductNr: " + productNr + " har tagits bort";
+                }
+                else
+                {
+                    ViewBag.Meddelande = "Produkten har inte tagits bort"; //haveto juice NOW
+                }
+                return View("Index", Products.getAllProducts());
             }
             else
             {
-                ViewBag.Meddelande = "Produkten har inte tagits bort"; //haveto juice NOW
+                return View("~/Views/Home/Index.cshtml");
             }
-            return View("Index", Products.getAllProducts());
         }
     }
 }
